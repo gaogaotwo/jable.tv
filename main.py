@@ -5,24 +5,16 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 import shutil
 import time
-
-"""
-   ---> 请求  https://jable.tv/videos/nacr-646/
-        但是该文件已加密！需要进行解密操作            
-            ->url值 https://asf-doc.mushroomtrack.com/hls/orjEHIeRGvu-IPja6NzVgQ/1679919510/31000/31576/31576.m3u8
-                -> 315761.ts
-                #EXT-X-KEY:METHOD=AES-128,URI="bb946d3b148cc2b9.ts",IV=0x055dc3bc8ef6e6b14418b7b6ad240c92
-            ->key值 https://asf-doc.mushroomtrack.com/hls/orjEHIeRGvu-IPja6NzVgQ/1679919510/31000/31576/bb946d3b148cc2b9.ts
-"""
 # 该网站需要代理相关的操作，需进行相关配置！
 proxy_url = "http://127.0.0.1:10810"
-# 视频下载链接
+# 视频下载链接,需自行填写
 url = "https://jable.tv/videos/ssis-639/"
+# 线程池数量
+thread_nums = 20
+
 file_tile = url.split('/')[4]
 req_url = ""
 iv = ""
-# 线程池数量
-thread_nums = 20
 
 # 创建的临时目录
 temp_dir = Path('./temp_dir')
@@ -116,8 +108,3 @@ if __name__ == '__main__':
     file_merging(m3u8_ts)
     end_time = time.time()
     print(" 已加载完毕" + " 花费时间: " + str(end_time - start_time) + ' s \n')
-
-
-
-
-
