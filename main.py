@@ -6,7 +6,7 @@ from pathlib import Path
 import shutil
 import time
 
-# 该网站需要代理相关的操作，需进行相关配置！
+# 该网站需要代理相关的操作，需进行相关配置
 proxy_url = "http://127.0.0.1:10810"
 # 视频下载链接,需自行填写
 url = "https://jable.tv/videos/ssis-639/"
