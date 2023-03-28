@@ -55,7 +55,7 @@ def jable_init(proxy_url, url):
 # 下载ts视频片段
 def get_content(u):
     cotent = "\""+req_url + u+"\""
-    cmd = 'curl --connect-timeout 15 --retry 5 -L -o ./temp_dir/' + u + ' -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36" -H "Referer: https://jable.tv/" -H "Accept-L: zh-CN,zh;q=0.9" -H "Sec-Fetch-User: ?1" -H "Sec-Ch-Ua: \"Not?A_Brand\";v=\"99\", \"Chromium\";v=\"90\", \"Google  Chrome\";v=\"90\"" -H "Sec-Ch-Ua-Mobile: ?0" -H "Sec-Ch-Ua-Platform: \"Windows\"" -H "Cache-Control: no-cache" -H "Pragma: no-cache" -x ' + proxy_url + " " + cotent + ' > ./temp_dir/' + u
+    cmd = 'curl --connect-timeout 30 --retry 5 -L -o ./temp_dir/' + u + ' -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36" -H "Referer: https://jable.tv/" -H "Accept-L: zh-CN,zh;q=0.9" -H "Sec-Fetch-User: ?1" -H "Sec-Ch-Ua: \"Not?A_Brand\";v=\"99\", \"Chromium\";v=\"90\", \"Google  Chrome\";v=\"90\"" -H "Sec-Ch-Ua-Mobile: ?0" -H "Sec-Ch-Ua-Platform: \"Windows\"" -H "Cache-Control: no-cache" -H "Pragma: no-cache" -x ' + proxy_url + " " + cotent + ' > ./temp_dir/' + u
     os.system(cmd)
     
 # ts视频片段解密
