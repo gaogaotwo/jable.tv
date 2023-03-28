@@ -5,22 +5,24 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 import shutil
 import time
-# 该网站需要代理相关的操作，需进行相关配置！
+################ 以下参数需进行配置
+# 该网站需要代理相关的操作，需进行相关配置
 proxy_url = "http://127.0.0.1:10810"
 # 视频下载链接
 url = "https://jable.tv/videos/stars-244/"
+# 线程池数量
+thread_nums = 20
+#################
+
 file_tile = url.split('/')[4]
 req_url = ""
 iv = ""
-# 线程池数量
-thread_nums = 20
-
 # 创建的临时目录
 temp_dir = Path('./temp_dir')
 temp_sol_dir = Path('./temp_sol')
 vedio_dir = Path('./vedio')
 
-
+# 获取m3u8 ts列表
 def jable_init(proxy_url, url):
     global req_url
     global iv
@@ -50,12 +52,13 @@ def jable_init(proxy_url, url):
     os.system(cmd)
     return m3u8_ts
 
-
+# 下载ts视频片段
 def get_content(u):
     cotent = "\""+req_url + u+"\""
     cmd = 'curl --connect-timeout 15 --retry 5 -L -o ./temp_dir/' + u + ' -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36" -H "Referer: https://jable.tv/" -H "Accept-L: zh-CN,zh;q=0.9" -H "Sec-Fetch-User: ?1" -H "Sec-Ch-Ua: \"Not?A_Brand\";v=\"99\", \"Chromium\";v=\"90\", \"Google  Chrome\";v=\"90\"" -H "Sec-Ch-Ua-Mobile: ?0" -H "Sec-Ch-Ua-Platform: \"Windows\"" -H "Cache-Control: no-cache" -H "Pragma: no-cache" -x ' + proxy_url + " " + cotent + ' > ./temp_dir/' + u
     os.system(cmd)
-
+    
+# ts视频片段解密
 def m3u8_fix(m3u8_ts):
     key = open('./temp_dir/m3u8.key', 'rb')
     cipher = AES.new(key.read(), AES.MODE_CBC, iv)
@@ -69,7 +72,7 @@ def m3u8_fix(m3u8_ts):
         except:
             print("ts子文件未成功下载")
     key.close()
-
+# ts视频片段合并
 def file_merging(m3u8_ts):
     with open('./vedio/' + file_tile + ".mp4" , 'wb') as f:
         for ts in m3u8_ts:
@@ -85,7 +88,6 @@ def file_merging(m3u8_ts):
     shutil.rmtree('./temp_dir')
     shutil.rmtree('./temp_sol')
     print("合并文件完成")
-
 
 if __name__ == '__main__':
     print('jable.tv多线程下载工具')
