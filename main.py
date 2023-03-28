@@ -6,15 +6,18 @@ from pathlib import Path
 import shutil
 import time
 
-# 该网站需要代理相关的操作，需进行相关配置！
+##########以下参数需要配置
+# 该网站需要代理相关的操作，需进行相关配置
 proxy_url = "http://127.0.0.1:10810"
 # 视频下载链接
 url = "https://jable.tv/videos/stars-244/"
+# 线程池数量
+thread_nums = 20
+###########
+
 file_tile = url.split('/')[4]
 req_url = ""
 iv = ""
-# 线程池数量
-thread_nums = 20
 # 创建的临时目录
 temp_dir = Path('./temp_dir')
 temp_sol_dir = Path('./temp_sol')
