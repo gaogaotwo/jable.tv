@@ -28,7 +28,6 @@ def jable_init(proxy_url, url):
     global iv
     # 相关命令，字符串缩进需注意，可能会报错
     cmd = 'curl -L -o ./hlsUrl.txt -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36" -H "Referer: https://jable.tv/" -H "Accept-L: zh-CN,zh;q=0.9" -H "Sec-Fetch-User: ?1" -H "Sec-Ch-Ua: \"Not?A_Brand\";v=\"99\", \"Chromium\";v=\"90\", \"Google  Chrome\";v=\"90\"" -H "Sec-Ch-Ua-Mobile: ?0" -H "Sec-Ch-Ua-Platform: \"Windows\"" -H "Cache-Control: no-cache" -H "Pragma: no-cache" -x ' + proxy_url + " " + url + ' >hlsUrl.txt'
-    print(cmd)
     os.system(cmd)
     with open('./hlsUrl.txt', 'rb') as f:
         text = f.read()
@@ -36,10 +35,8 @@ def jable_init(proxy_url, url):
     rls = hlsUrl[0].split('/')
     # 修复URL链接并不确定
     for i in range(len(rls) - 1):
-        req_url = req_url + rls[i] + "/"
-        
+        req_url = req_url + rls[i] + "/" 
     cmd = 'curl -L  -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36" -H "Referer: https://jable.tv/" -H "Accept-L: zh-CN,zh;q=0.9" -H "Sec-Fetch-User: ?1" -H "Sec-Ch-Ua: \"Not?A_Brand\";v=\"99\", \"Chromium\";v=\"90\", \"Google  Chrome\";v=\"90\"" -H "Sec-Ch-Ua-Mobile: ?0" -H "Sec-Ch-Ua-Platform: \"Windows\"" -H "Cache-Control: no-cache" -H "Pragma: no-cache" -x ' + proxy_url + "  " +"\"" +hlsUrl[0] +"\"" +' > ./ts.txt'
-    print(cmd)
     os.system(cmd)
     with open('./ts.txt', 'rb') as f:
         text = f.read()
