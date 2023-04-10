@@ -67,7 +67,7 @@ def m3u8_fix(m3u8_ts):
             t.close()
             tf.close()
         except:
-            print("ts子文件未成功下载")
+            print("ts子文件未成功下载 %s"%ts)
     key.close()
 # ts视频片段合并
 def file_merging(m3u8_ts):
@@ -79,7 +79,7 @@ def file_merging(m3u8_ts):
                 with open('./temp_sol/' + ts, 'rb') as tf:
                     f.write(tf.read())
             except:
-                print("ts子文件未成功下载", ts)
+                print("ts子文件未成功下载 %s"%ts)
     tf.close()
     f.close()
     shutil.rmtree('./temp_dir')
