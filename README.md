@@ -7,6 +7,8 @@ how to use?
 
     3,配置线程池数量，请根据实际配置填写 默认 thread_nums = 20
 
+    pip install pycryptodome --upgrade
+    
     运行 python main.py
 
 
